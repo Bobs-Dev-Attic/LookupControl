@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.PowerApps.MSBuild.Pcf/2.6.4">
+  <PropertyGroup>
+    <PcfBuildMode>production</PcfBuildMode>
+  </PropertyGroup>
+</Project>

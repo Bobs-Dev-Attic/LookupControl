@@ -1,0 +1,210 @@
+/* ===========================================================================
+   SimpleLookupControl — D365 Lookup field style
+   All selectors prefixed slc- to avoid host-page collisions.
+   =========================================================================== */
+
+/* ── Root wrapper ─────────────────────────────────────────────────────────── */
+
+.slc-root {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    min-height: 32px;
+    box-sizing: border-box;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+                 "Helvetica Neue", sans-serif;
+}
+
+/* ── Field wrapper: input + search button, shares the D365 border ─────────── */
+
+.slc-field-wrap {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 32px;
+    background: #ffffff;
+    border: 1px solid #8a8886;
+    box-sizing: border-box;
+    cursor: text;
+    transition: border-color 0.1s;
+}
+
+/* Hover — darken the border like D365 */
+.slc-field-wrap:hover:not(.slc-field-wrap--editing):not(.slc-field-wrap--disabled) {
+    border-color: #323130;
+}
+
+/* Focused / editing — blue underline-style border (2 px) */
+.slc-field-wrap--editing {
+    border: 2px solid #0078d4;
+    cursor: default;
+}
+
+/* Disabled */
+.slc-field-wrap--disabled {
+    background: #f3f2f1;
+    border-color: #c8c6c4;
+    cursor: default;
+}
+
+/* ── Text input ───────────────────────────────────────────────────────────── */
+
+.slc-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    padding: 0 4px 0 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    color: #201f1e;
+    cursor: inherit;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.slc-input::placeholder {
+    color: #a19f9d;
+    font-style: italic;
+}
+
+/* readonly but not disabled — preserve text cursor for UX clarity */
+.slc-input[readonly]:not(:disabled) {
+    cursor: text;
+}
+
+.slc-field-wrap--disabled .slc-input {
+    color: #a19f9d;
+    cursor: default;
+}
+
+/* Diagonal stripe while async search is in-flight */
+.slc-input--busy {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        rgba(0, 120, 212, 0.06) 4px,
+        rgba(0, 120, 212, 0.06) 8px
+    );
+}
+
+/* Placeholder span used in the loading state */
+.slc-input--placeholder {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #a19f9d;
+    font-style: italic;
+}
+
+/* ── Search icon button (inside the bordered field area) ─────────────────── */
+
+.slc-search-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    color: #605e5c;
+    cursor: pointer;
+    transition: color 0.1s, background-color 0.1s;
+    box-sizing: border-box;
+}
+
+.slc-search-btn:hover:not(:disabled) {
+    color: #0078d4;
+    background-color: rgba(0, 120, 212, 0.06);
+}
+
+.slc-search-btn:disabled {
+    color: #c8c6c4;
+    cursor: default;
+}
+
+.slc-field-wrap--editing .slc-search-btn {
+    color: #0078d4;
+}
+
+.slc-search-icon-svg {
+    display: block;
+}
+
+/* ── Clear button — outside the field border (matches D365 pattern) ─────── */
+
+.slc-clear-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    margin-left: 4px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 2px;
+    font-size: 16px;
+    line-height: 1;
+    color: #605e5c;
+    cursor: pointer;
+    transition: color 0.1s, background-color 0.1s;
+}
+
+.slc-clear-btn:hover {
+    color: #c00;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.slc-clear-btn:focus-visible {
+    outline: 2px solid #0078d4;
+    outline-offset: 1px;
+}
+
+/* ── Dropdown (portalled to document.body, position:fixed at runtime) ─────── */
+
+.slc-dropdown {
+    background: #ffffff;
+    border: 1px solid #c8c6c4;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    max-height: 224px;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    z-index: 10000;
+    box-sizing: border-box;
+}
+
+.slc-dropdown-item {
+    padding: 7px 12px;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
+                 "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    color: #201f1e;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.slc-dropdown-item:hover,
+.slc-dropdown-item--highlighted {
+    background-color: #f3f2f1;
+    color: #201f1e;
+}

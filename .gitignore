@@ -1,0 +1,6 @@
+node_modules/
+out/
+obj/
+*.zip
+SolutionPack/Controls/
+generated/

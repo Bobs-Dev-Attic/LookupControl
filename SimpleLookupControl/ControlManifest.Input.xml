@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control
+    namespace="CFF"
+    constructor="SimpleLookupControl"
+    version="0.0.6"
+    display-name-key="SimpleLookupControl_DisplayName"
+    description-key="SimpleLookupControl_Description"
+    control-type="standard"
+  >
+    <!--
+      lookupField binds to a Lookup-type field on a model-driven form.
+      The control displays the current value, lets the user search for
+      and select a different record from the entity's default view (first
+      column only), and emits the new value back via notifyOutputChanged.
+
+      When no value is selected the control falls back to the platform's
+      native lookup dialog (context.utils.lookupObjects) so the target
+      entity type does not need to be configured separately.
+    -->
+    <property
+      name="lookupField"
+      display-name-key="LookupField_DisplayName"
+      description-key="LookupField_Description"
+      of-type="Lookup.Simple"
+      usage="bound"
+      required="true"
+    />
+
+    <resources>
+      <code path="index.ts" order="1" />
+      <css path="css/SimpleLookupControl.css" order="1" />
+    </resources>
+
+    <!--
+      WebAPI: retrieveMultipleRecords for search queries and for loading
+              the default-view FetchXML from the savedquery entity.
+      Utility: getEntityMetadata for PrimaryNameAttribute, PrimaryIdAttribute,
+               and ObjectTypeCode (used to locate the default view).
+    -->
+    <feature-usage>
+      <uses-feature name="WebAPI" required="true" />
+      <uses-feature name="Utility" required="true" />
+    </feature-usage>
+
+  </control>
+</manifest>

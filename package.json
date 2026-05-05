@@ -1,0 +1,30 @@
+{
+  "name": "simple-lookup-control",
+  "version": "0.0.1",
+  "description": "PCF control — replace this description",
+  "scripts": {
+    "build": "pcf-scripts build",
+    "clean": "pcf-scripts clean",
+    "prerebuild": "node scripts/bump-version.js",
+    "rebuild": "set NODE_OPTIONS=--openssl-legacy-provider && pcf-scripts rebuild",
+    "pack": "powershell -ExecutionPolicy Bypass -File scripts/pack.ps1",
+    "release": "npm run rebuild && npm run pack",
+    "start": "pcf-scripts start watch",
+    "refreshTypes": "pcf-scripts refreshTypes"
+  },
+  "dependencies": {
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.34",
+    "@types/powerapps-component-framework": "1.3.4",
+    "@types/react": "^16.14.60",
+    "@types/react-dom": "^16.9.23",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
+    "@typescript-eslint/parser": "^8.59.1",
+    "pcf-scripts": "1.3.6",
+    "pcf-start": "1.3.6",
+    "typescript": "4.9.5"
+  }
+}
