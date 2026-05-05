@@ -1,6 +1,6 @@
 node_modules/
 out/
 obj/
-*.zip
+SimpleLookupControl_*.zip
 SolutionPack/Controls/
 generated/
